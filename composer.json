@@ -1,0 +1,19 @@
+{
+    "name": "soft/api-response",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Soft\\ApiResponse\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Odai Alzoubi",
+            "email": "odaialzoubi391@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
