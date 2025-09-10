@@ -9,23 +9,24 @@ class SuccessResponse extends ApiResponse
 {
     protected mixed $data = null;
 
+    public function __construct()
+    {
+        $this->success = true;
+    }
     public function data($data): self
     {
         $this->data = $data;
         return $this;
     }
-    public function response()
+    public function toArray(): array
     {
-        return [
-            'success' => $this->success,
-            'data' => $this->data
-        ];
-    }
-    public function toJson()
-    {
-        $response = $this->response();
-        if ($this->message)
-            $response['message'] = $this->message;
-        return response()->json($response, $this->responseStatus)->setStatusCode($this->code);
+        return array_filter(
+            [
+                'success' => $this->success,
+                'message' => $this->message,
+                'data' => $this->data,
+            ],
+            fn($v) => $v !== null && $v !== []
+        );
     }
 }

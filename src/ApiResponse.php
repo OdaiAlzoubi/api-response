@@ -2,16 +2,18 @@
 
 namespace Soft\ApiResponse;
 
+use Illuminate\Support\Facades\Response;
+
 abstract class ApiResponse
 {
     protected bool $success = true;
-    protected int $responseStatus = 200;
+    protected int $statusCode = 200;
     protected ?string $message = null;
-    protected int $code = 200;
+    protected array $errors = [];
 
-    public function responseStatus($responseStatus): self
+    public function statusCode($statusCode): self
     {
-        $this->responseStatus = $responseStatus;
+        $this->statusCode = $statusCode;
         return $this;
     }
     public function message($message): self
@@ -24,10 +26,10 @@ abstract class ApiResponse
         $this->success = $success;
         return $this;
     }
-    public function code($code): self
+    abstract public function toArray(): array;
+
+    public function toJson()
     {
-        $this->code = $code;
-        return $this;
+        return response()->json($this->toArray(), $this->statusCode);
     }
-    abstract public function toJson();
 }

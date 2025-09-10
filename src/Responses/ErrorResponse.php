@@ -7,8 +7,6 @@ use Soft\ApiResponse\ApiResponse;
 
 class ErrorResponse extends ApiResponse
 {
-    protected string $errors = '';
-
     public function __construct()
     {
         $this->success = false;
@@ -19,14 +17,15 @@ class ErrorResponse extends ApiResponse
         return $this;
     }
 
-    public function toJson()
+    public function toArray(): array
     {
-        $response = [
-            'success' => $this->success,
-            'errors' => $this->errors
-        ];
-        if ($this->message)
-            $response['message'] = $this->message;
-        return response()->json($response, $this->responseStatus)->setStatusCode($this->code);
+        return array_filter(
+            [
+                'success' => $this->success,
+                'message' => $this->message,
+                'errors' => $this->errors,
+            ],
+            fn($v) => $v !== null && $v !== []
+        );
     }
 }

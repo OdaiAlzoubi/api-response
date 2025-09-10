@@ -7,9 +7,6 @@ use Soft\ApiResponse\ApiResponse;
 
 class ValidationErrorResponse extends ApiResponse
 {
-    protected ?string $message = 'Validation Error';
-    protected ?array $errors = null;
-
     public function __construct()
     {
         $this->success = false;
@@ -21,13 +18,15 @@ class ValidationErrorResponse extends ApiResponse
         return $this;
     }
 
-    public function toJson()
+    public function toArray(): array
     {
-        $response = [
-            'success' => $this->success,
-            'message' => $this->message,
-            'errors' => $this->errors
-        ];
-        return response()->json($response, $this->responseStatus)->setStatusCode($this->code);
+        return array_filter(
+            [
+                'success' => $this->success,
+                'message' => $this->message,
+                'errors' => $this->errors,
+            ],
+            fn($v) => $v !== null && $v !== []
+        );
     }
 }
