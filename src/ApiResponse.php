@@ -16,6 +16,11 @@ abstract class ApiResponse
         $this->statusCode = $statusCode;
         return $this;
     }
+    public function errors($errors): self
+    {
+        $this->errors = $errors;
+        return $this;
+    }
     public function message($message): self
     {
         $this->message = $message;

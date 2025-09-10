@@ -11,13 +11,6 @@ class ValidationErrorResponse extends ApiResponse
     {
         $this->success = false;
     }
-
-    public function errors($errors): self
-    {
-        $this->errors = $errors;
-        return $this;
-    }
-
     public function toArray(): array
     {
         return array_filter(
