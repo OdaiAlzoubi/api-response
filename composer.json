@@ -1,19 +1,30 @@
 {
-    "name": "soft/api-response",
-    "description": "",
-    "type": "library",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Soft\\ApiResponse\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Odai Alzoubi",
-            "email": "odaialzoubi391@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {}
+  "name": "soft/api-response",
+  "description": "",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Soft\\ApiResponse\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Soft\\ApiResponse\\ApiResponseServiceProvider"
+      ],
+      "aliases": {
+        "ApiResponse": "Soft\\ApiResponse\\Facades\\ApiResponse"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {},
+  "authors": [
+    {
+      "name": "Odai Alzoubi",
+      "email": "odaialzoubi391@gmail.com"
+    }
+  ]
 }
